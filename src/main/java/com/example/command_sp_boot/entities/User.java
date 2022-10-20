@@ -33,10 +33,11 @@ public class User {
     @Column(name = "chat_id")
     private String chatId;
 
-    public User(String userName, Group groupId, Role roleId) {
+    public User(String userName, Group group, Role role, String chatId) {
         this.userName = userName;
-        this.group = groupId;
-        this.role = roleId;
+        this.group = group;
+        this.role = role;
+        this.chatId = chatId;
     }
 
     @Override

@@ -1,8 +1,6 @@
 package com.example.command_sp_boot.soapService;
 
-import com.example.command_sp_boot.dto.GroupDto;
-import com.example.command_sp_boot.dto.RoleDto;
-import com.example.command_sp_boot.dto.UserDto;
+import com.example.command_sp_boot.dto.UserModel;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -19,105 +17,121 @@ public interface CommandWs {
     @RequestWrapper(
             localName = "saveUser",
             targetNamespace = "http://service.ws.sample/",
-            className = "com.example.command_sp_boot.soapService.CommandWs"
+            className = "sample.ws.service.RequestSaveUser"
     )
-    @WebMethod(action = "urn:saveUser")
-    void saveUser(@WebParam(name = "user", targetNamespace = "") UserDto userDto);
+    @WebMethod(action = "urn:SaveUser")
+    @ResponseWrapper(
+            localName = "saveUserResponse",
+            targetNamespace = "http://service.ws.sample/",
+            className = "sample.ws.service.SaveUserResponse")
+    void saveUser(@WebParam(name = "user", targetNamespace = "") UserModel userModel);
 
     @WebResult(name = "getListOfUsersByRole", targetNamespace = "")
     @RequestWrapper(
             localName = "getListOfUsersByRole",
             targetNamespace = "http://service.ws.sample/",
-            className = "com.example.command_sp_boot.soapService.CommandWs"
+            className = "sample.ws.service.RequestGetListOfUsersByRole"
     )
-    @WebMethod(action = "urn:getListOfUsersByRole")
+    @WebMethod(action = "urn:GetListOfUsersByRole")
     @ResponseWrapper(
-            localName = "listOfUsersByRole",
+            localName = "getListOfUsersByRoleResponse",
             targetNamespace = "http://service.ws.sample/",
-            className = "com.example.command_sp_boot.listOfUsersByRole"
+            className = "sample.ws.service.GetListOfUsersByRoleResponse"
     )
-    List<UserDto> getListOfUsersByRole(@WebParam(name = "roleDto", targetNamespace = "") RoleDto roleDto);
+    List<UserModel> getListOfUsersModelsByRoleName(@WebParam(name = "roleName", targetNamespace = "") String roleName);
 
     @WebResult(name = "getListOfUsers", targetNamespace = "")
     @RequestWrapper(
             localName = "getListOfUsers",
             targetNamespace = "http://service.ws.sample/",
-            className = "com.example.command_sp_boot.soapService.CommandWs"
+            className = "sample.ws.service.RequestGetListOfUsers"
     )
-    @WebMethod(action = "urn:getListOfUsers")
+    @WebMethod(action = "urn:GetListOfUsers")
     @ResponseWrapper(
-            localName = "listOfUsers",
+            localName = "getListOfUsersResponse",
             targetNamespace = "http://service.ws.sample/",
-            className = "com.example.command_sp_boot.listOfUsers"
+            className = "sample.ws.service.GetListOfUsersResponse"
     )
-    List<UserDto> getListOfUsers();
+    List<UserModel> getListOfUsers();
 
     @WebResult(name = "deleteUser", targetNamespace = "")
     @RequestWrapper(
             localName = "deleteUser",
             targetNamespace = "http://service.ws.sample/",
-            className = "com.example.command_sp_boot.soapService.CommandWs"
+            className = "sample.ws.service.RequestDeleteUser"
     )
-    @WebMethod(action = "urn:deleteUser")
-    void deleteUser(@WebParam(name = "userDto", targetNamespace = "") UserDto userDto);
+    @WebMethod(action = "urn:DeleteUser")
+    @ResponseWrapper(
+            localName = "deleteUserResponse",
+            targetNamespace = "http://service.ws.sample/",
+            className = "sample.ws.service.DeleteUserResponse")
+    void deleteUser(@WebParam(name = "userName", targetNamespace = "") String userName);
 
     @WebResult(name = "saveGroup", targetNamespace = "")
     @RequestWrapper(
             localName = "saveGroup",
             targetNamespace = "http://service.ws.sample/",
-            className = "com.example.command_sp_boot.soapService.CommandWs"
+            className = "sample.ws.service.RequestSaveGroup"
     )
-    @WebMethod(action = "urn:saveGroup")
-    void saveGroup(@WebParam(name = "groupDto", targetNamespace = "") GroupDto groupDto);
+    @WebMethod(action = "urn:SaveGroup")
+    @ResponseWrapper(
+            localName = "saveGroupResponse",
+            targetNamespace = "http://service.ws.sample/",
+            className = "sample.ws.service.SaveGroupResponse")
+    void saveGroup(@WebParam(name = "groupName", targetNamespace = "") String groupName);
 
     @WebResult(name = "deleteGroup", targetNamespace = "")
     @RequestWrapper(
             localName = "deleteGroup",
             targetNamespace = "http://service.ws.sample/",
-            className = "com.example.command_sp_boot.soapService.CommandWs"
+            className = "sample.ws.service.RequestDeleteGroup"
     )
-    @WebMethod(action = "urn:deleteGroup")
-    void deleteGroup(@WebParam(name = "groupDto", targetNamespace = "") GroupDto groupDto);
-
-    @WebResult(name = "getGroups", targetNamespace = "")
-    @RequestWrapper(
-            localName = "getGroups",
-            targetNamespace = "http://service.ws.sample/",
-            className = "com.example.command_sp_boot.soapService.CommandWs"
-    )
-    @WebMethod(action = "urn:getGroups")
+    @WebMethod(action = "urn:DeleteGroup")
     @ResponseWrapper(
-            localName = "groups",
+            localName = "deleteGroupResponse",
             targetNamespace = "http://service.ws.sample/",
-            className = "com.example.command_sp_boot.groups"
-    )
-    List<GroupDto> getGroups();
+            className = "sample.ws.service.DeleteGroupResponse")
+    void deleteGroup(@WebParam(name = "groupName", targetNamespace = "") String groupName);
 
-    @WebResult(name = "getListOfUsersByGroup", targetNamespace = "")
+    @WebResult(name = "getGroupsNames", targetNamespace = "")
     @RequestWrapper(
-            localName = "getListOfUsersByGroup",
+            localName = "getGroupsNames",
             targetNamespace = "http://service.ws.sample/",
-            className = "com.example.command_sp_boot.soapService.CommandWs"
+            className = "sample.ws.service.RequestGetGroupsNames"
     )
-    @WebMethod(action = "urn:getListOfUsersByGroup")
+    @WebMethod(action = "urn:GetGroupsNames")
     @ResponseWrapper(
-            localName = "listOfUsersByGroup",
+            localName = "getGroupsNamesResponse",
             targetNamespace = "http://service.ws.sample/",
-            className = "com.example.command_sp_boot.listOfUsersByGroup"
+            className = "sample.ws.service.GetGroupsNamesResponse"
     )
-    List<UserDto> getListOfUsersByGroup(@WebParam(name = "groupDto", targetNamespace = "") GroupDto groupDto);
+    List<String> getGroupsNames();
 
-    @WebResult(name = "getUserByName", targetNamespace = "")
+    @WebResult(name = "getListOfUsersByGroupName", targetNamespace = "")
     @RequestWrapper(
-            localName = "getUserByName",
+            localName = "getListOfUsersByGroupName",
             targetNamespace = "http://service.ws.sample/",
-            className = "com.example.command_sp_boot.soapService.CommandWs"
+            className = "sample.ws.service.RequestGetListOfUsersByGroupName"
     )
-    @WebMethod(action = "urn:getUserByName")
+    @WebMethod(action = "urn:GetListOfUsersByGroupName")
     @ResponseWrapper(
-            localName = "userByName",
+            localName = "getListOfUsersByGroupNameResponse",
             targetNamespace = "http://service.ws.sample/",
-            className = "com.example.command_sp_boot.userByName"
+            className = "sample.ws.service.GetListOfUsersByGroupNameResponse"
     )
-    UserDto getUserByName(@WebParam(name = "name", targetNamespace = "") String name);
+    List<UserModel> getListOfUsersModelsByGroupName(@WebParam(name = "groupName", targetNamespace = "") String groupName);
+
+    @WebResult(name = "getUserModelByUserName", targetNamespace = "")
+    @RequestWrapper(
+            localName = "getUserModelByUserName",
+            targetNamespace = "http://service.ws.sample/",
+            className = "sample.ws.service.RequestGetUserModelByUserName"
+    )
+    @WebMethod(action = "urn:GetUserModelByUserName")
+    @ResponseWrapper(
+            localName = "getUserModelByUserNameResponse",
+            targetNamespace = "http://service.ws.sample/",
+            className = "sample.ws.service.GetUserModelByUserNameResponse"
+    )
+    UserModel getUserModelByUserName(@WebParam(name = "userName", targetNamespace = "") String userName);
 }

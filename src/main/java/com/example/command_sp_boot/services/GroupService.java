@@ -1,14 +1,16 @@
 package com.example.command_sp_boot.services;
 
-import com.example.command_sp_boot.dto.GroupDto;
+import com.example.command_sp_boot.entities.Group;
 
 import java.util.List;
 
 public interface GroupService {
 
-    void saveGroup(GroupDto groupDto);
+    void saveGroup(String groupName);
 
-    void deleteGroup(GroupDto groupDto);
+    void deleteGroup(String groupName);
 
-    List<GroupDto> getGroups();
+    List<String> getGroupsNames();
+
+    Group findGroupByName(String name);
 }

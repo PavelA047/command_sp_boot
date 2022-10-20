@@ -1,21 +1,22 @@
 package com.example.command_sp_boot.services;
 
-import com.example.command_sp_boot.dto.GroupDto;
-import com.example.command_sp_boot.dto.RoleDto;
-import com.example.command_sp_boot.dto.UserDto;
+import com.example.command_sp_boot.dto.UserModel;
+import com.example.command_sp_boot.entities.Group;
 
 import java.util.List;
 
 public interface UserService {
-    void saveUser(UserDto userDto);
+    void saveUser(UserModel userModel);
 
-    List<UserDto> getListOfUsersByRole(RoleDto roleDto);
+    List<UserModel> getListOfUsersModelsByRoleName(String roleName);
 
-    List<UserDto> getListOfUsersByGroup(GroupDto groupDto);
+    List<UserModel> getListOfUsersModelsByGroupName(String groupName);
 
-    List<UserDto> getListOfUsers();
+    List<UserModel> getListOfUsers();
 
-    void deleteUser(UserDto userDto);
+    void deleteUser(String userName);
 
-    UserDto getUserByName(String name);
+    UserModel getUserModelByUserName(String name);
+
+    boolean isAnyUsersInSuchGroup(Group group);
 }

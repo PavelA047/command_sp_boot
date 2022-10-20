@@ -1,5 +1,7 @@
-package com.example.command_sp_boot.soapService;
+package com.example.command_sp_boot;
 
+import com.example.command_sp_boot.exampleSoap.HelloServiceImpl;
+import com.example.command_sp_boot.soapService.CommandWs;
 import org.apache.cxf.Bus;
 
 import javax.xml.ws.Endpoint;
@@ -15,10 +17,20 @@ public class WsConfig {
     @Autowired
     private Bus bus;
 
+    @Autowired
+    private CommandWs commandWs;
+
     @Bean
     public Endpoint endpointCommandWs() {
-        EndpointImpl endpoint = new EndpointImpl(bus, new CommandWsImpl());
+        EndpointImpl endpoint = new EndpointImpl(bus, commandWs);
         endpoint.publish("/CommandWs");
+        return endpoint;
+    }
+
+    @Bean
+    public Endpoint helloEndpoint() {
+        EndpointImpl endpoint = new EndpointImpl(bus, new HelloServiceImpl());
+        endpoint.publish("/ServiceHello");
         return endpoint;
     }
 }
