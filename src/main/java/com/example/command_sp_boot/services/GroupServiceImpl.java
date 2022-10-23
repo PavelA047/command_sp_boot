@@ -5,6 +5,7 @@ import com.example.command_sp_boot.repositories.GroupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,11 +23,15 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
+    @Transactional
     public void saveGroup(String groupName) {
-        groupRepository.save(new Group(groupName));
+        Group groupByName = groupRepository.findGroupByName(groupName);
+        if (groupByName == null)
+            groupRepository.save(new Group(groupName));
     }
 
     @Override
+    @Transactional
     public void deleteGroup(String groupName) {
         Group group = groupRepository.findGroupByName(groupName);
         if (group != null && !userService.isAnyUsersInSuchGroup(group))

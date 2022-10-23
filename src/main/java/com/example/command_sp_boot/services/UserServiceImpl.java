@@ -74,6 +74,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void deleteUser(String userName) {
         User user = userRepository.findByUserName(userName);
         if (user != null)
