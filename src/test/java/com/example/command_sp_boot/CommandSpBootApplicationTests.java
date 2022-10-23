@@ -13,7 +13,6 @@ import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
 
-//OLD_INFORMATION_SCHEMA=TRUE   ----    H2
 @SpringBootTest
 @TestPropertySource("/application-test.properties")
 @Sql(value = {"/after_test.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
